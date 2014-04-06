@@ -162,7 +162,6 @@ describe("Transport", function () {
             var spy = jasmine.createSpy(),
                 stop = transport.listen("channel", data, spy);
 
-            expect(stop).toBeInstanceOf(Function);
             stop();
             expect(func.wasCalled).toBe(true);
             expect(func.mostRecentCall.object).toBe(obj);
