@@ -1,6 +1,6 @@
 #Transport
 
-A hub for centralizing all your request handlers within your application. Implements the disposable pattern.
+A hub for centralizing all your request handlers within your application. Write handlers for streaming files, doing http requests, querying databases, REST apis, other applications or anything else and hide everything behind a convenient and straightforward API. The handlers can be shared between several `Transport`, like the [SocketIOTransport](https://github.com/flams/olives#socketiotransport) for instance, which will hide socket.io behind the same interface so you can have your handlers on the server side and query them from the client side!
 
 #Installation
 
