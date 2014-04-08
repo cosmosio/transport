@@ -29,7 +29,7 @@ module.exports = function TransportConstructor($reqHandlers) {
      * @returns
      */
     this.setReqHandlers = function setReqHandlers(reqHandlers) {
-        if (reqHandlers instanceof Object) {
+        if (typeof reqHandlers == "object") {
             _reqHandlers = reqHandlers;
             return true;
         } else {
@@ -78,16 +78,16 @@ module.exports = function TransportConstructor($reqHandlers) {
      * @returns {Function} the abort function to call to stop listening
      */
     this.listen = function listen(reqHandler, data, callback, scope) {
+        var func,
+            abort;
+
         if (_reqHandlers.has(reqHandler) &&
             typeof data != "undefined" &&
             typeof callback == "function") {
 
-            var func = function () {
-                callback.apply(scope, arguments);
-            },
-            abort;
-
+            func = callback.bind(scope);
             abort = _reqHandlers.get(reqHandler)(data, func, func);
+
             return function () {
                 if (typeof abort == "function") {
                     abort();
