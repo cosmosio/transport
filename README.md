@@ -2,8 +2,6 @@
 
 A hub for centralizing all your request handlers within your application. Implements the disposable pattern.
 
-T
-
 #Installation
 
 ```bash
@@ -48,7 +46,7 @@ Make the request to `simpleHandler`:
 
 ```js
 transport.request("simpleHandler", "payload", function callback(result) {
-    // result
+    // do something with result
 });
 ```
 
@@ -99,7 +97,7 @@ var handlers = {
 };
 ```
 
-Now, when calling `transport.listen`, we can called the `stop()` function returns by the `handler`.
+Now, when calling `transport.listen`, we can call the `stop()` function returned by the `handler`.
 
 ```js
 var stop = transport.listen("closableChannel", "filename", function onEnd() { ... }, function onData() { ... });
@@ -117,10 +115,6 @@ var handlers = {
     closableChannel: function (payload, onEnd, onData) {
         var stream = getStream(payload);
 
-        function endOrError() {
-
-        }
-
         stream.on("data", onData);
         stream.on("end", function (data) {
             onEnd(null, data);
@@ -131,6 +125,8 @@ var handlers = {
     }
 };
 ````
+
+And now we can handle the errors in the onEnd callback.
 
 ```js
 transport.listen("closableChannel", "filename", function onEnd(error, data) {
